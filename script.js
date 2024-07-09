@@ -26,6 +26,7 @@ let numberButtons = document.querySelectorAll('.number');
 let operatorButtons = document.querySelectorAll('.function');
 let equalButton = document.querySelector('.equals');
 let clearButton = document.querySelector('.clear');
+let delButton = document.querySelector('.del');
 
 
 let result;
@@ -44,14 +45,18 @@ function operate(first, operator, second) {
             result = multiply(first, second);
             break;
         case '/':
-            result = divide(first, second);
+            if (second === 0) {
+                result = 'ERROR';
+            }
+            else {
+                result = divide(first, second);
+            }
             break;
         default:
-            result = 'Error';
+            result = 'ERROR';
     }
     displayValue.textContent = result;
 }
-
 
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -93,5 +98,16 @@ clearButton.addEventListener('click', () => {
     operator = ''; 
     second = ''; 
     displayValue.textContent = '0'; 
+});
+
+delButton.addEventListener('click', () => {
+    if (first) {
+        first = Math.floor(first / 10);
+        displayValue.textContent = first;
+    }
+    if (second) {
+        second = Math.floor(second / 10);
+        displayValue.textContent = second;
+    }
 });
 
