@@ -27,6 +27,7 @@ let operatorButtons = document.querySelectorAll('.function');
 let equalButton = document.querySelector('.equals');
 let clearButton = document.querySelector('.clear');
 let delButton = document.querySelector('.del');
+let decimalButton = document.querySelector('.dot');
 
 
 let result;
@@ -107,6 +108,17 @@ delButton.addEventListener('click', () => {
     }
     if (second) {
         second = Math.floor(second / 10);
+        displayValue.textContent = second;
+    }
+});
+
+decimalButton.addEventListener('click', () => {
+    if (first) {
+        first += '.';
+        displayValue.textContent = first;
+    }
+    if (second) {
+        second += '.';
         displayValue.textContent = second;
     }
 });
