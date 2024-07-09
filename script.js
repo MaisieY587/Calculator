@@ -14,63 +14,85 @@ function divide(a, b) {
     return a / b;
 }
 
-let first;
-let operator;
-let second;
+let first = '';
+let operator = '';
+let second = '';
 
 let solution;
-
-function operate(first, operator, second) {
-    if (operator === '+') {
-        solution.textContent = add(first, second);
-        displayValue.textContent = solution;
-    }
-    if (operator === '-') {
-        solution.textContent = subtract(first, second);
-        displayValue.textContent = solution;
-    }
-    if (operator === '*') {
-        solution.textContent =  multiply(first, second);
-        displayValue.textContent = solution;
-    }
-    if (operator === '/') {
-        solution.textContent =  divide(first, second);
-        displayValue.textContent = solution;
-    }
-}
-
-let multiplyBtn = document.querySelector('.multiply');
-let addBtn = document.querySelector('.add');
-let subtractBtn = document.querySelector('.subtract');
-let divideBtn = document.querySelector('.divide');
-
-multiplyBtn.addEventListener('click', () => {
-    operator.textContent = '*'
-});
-
-addBtn.addEventListener('click', () => {
-    operator.textContent = '+'
-});
-
-subtractBtn.addEventListener('click', () => {
-    operator.textContent = '-'
-});
-
-divideBtn.addEventListener('click', () => {
-    operator.textContent = '/'
-});
 
 
 let displayValue = document.querySelector('.display');
 let numberButtons = document.querySelectorAll('.number');
+let operatorButtons = document.querySelectorAll('.function');
+let equalButton = document.querySelector('.equals');
+let clearButton = document.querySelector('.clear');
+
+
+function operate(first, operator, second) {
+    let result;
+    first = Number(first); 
+    second = Number(second); 
+
+    switch (operator) {
+        case '+':
+            result = add(first, second);
+            break;
+        case '-':
+            result = subtract(first, second);
+            break;
+        case '*':
+            result = multiply(first, second);
+            break;
+        case '/':
+            result = divide(first, second);
+            break;
+        default:
+            result = 'Error';
+    }
+
+    displayValue.textContent = result;
+}
+
 
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
-        if (displayValue.textContent === '0') {
-            displayValue.textContent = button.textContent;
-        } else {
-            displayValue.textContent += button.textContent;
+        if (!operator) {
+            if (displayValue.textContent === '0') {
+                first = button.textContent;
+                displayValue.textContent = first;
+            } else {
+                first += button.textContent;
+                displayValue.textContent = first
+            }
+        }
+        if (operator) {
+            second += button.textContent;
+            displayValue.textContent = second;
         }
     });
+});
+
+operatorButtons.forEach(button => { 
+    button.addEventListener('click', () => {
+        if (first && !second) {
+            operator = button.textContent; 
+        }
+    });
+});
+
+equalButton.addEventListener('click', () => { 
+    if (first && operator && second) { 
+        operate(first, operator, second);
+        first = '';
+        operator = '';
+        second = '';
+    }
+});
+
+clearButton.addEventListener('click', () => { 
+    first = ''; 
+    operator = ''; 
+    second = ''; 
+    displayValue.textContent = '0'; 
 });
 
