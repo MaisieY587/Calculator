@@ -32,3 +32,17 @@ function operate(first, operator, second) {
         divide(first, second);
     }
 }
+
+
+let displayValue = document.querySelector('.display');
+let numberButtons = document.querySelectorAll('.number');
+
+numberButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        if (displayValue.textContent === '0') {
+            displayValue.textContent = button.textContent;
+        } else {
+            displayValue.textContent += button.textContent;
+        }
+    });
+});
