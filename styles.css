@@ -19,16 +19,19 @@ body {
 }
 
 .display {
-    width: 330px;
+    width: 310px;
     display: flex;
     height: 100px;
-    justify-content: center;
+    justify-content:flex-end;
     border-radius: 20px;
     margin-top: 20px;
-    background-color:white;
-    color: black;
-    align-items: center;
+    background-color:lightyellow;
+    color: rgb(189, 145, 130);
+    align-items:last baseline;
     margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 30px;
+    padding: 5px 10px;
 }
 
 button {
