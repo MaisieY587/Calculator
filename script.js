@@ -28,8 +28,8 @@ let equalButton = document.querySelector('.equals');
 let clearButton = document.querySelector('.clear');
 
 
+let result;
 function operate(first, operator, second) {
-    let result;
     first = Number(first); 
     second = Number(second); 
 
@@ -49,7 +49,6 @@ function operate(first, operator, second) {
         default:
             result = 'Error';
     }
-
     displayValue.textContent = result;
 }
 
@@ -83,7 +82,7 @@ operatorButtons.forEach(button => {
 equalButton.addEventListener('click', () => { 
     if (first && operator && second) { 
         operate(first, operator, second);
-        first = '';
+        first = result;
         operator = '';
         second = '';
     }
